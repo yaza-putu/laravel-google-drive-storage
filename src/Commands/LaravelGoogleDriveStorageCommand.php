@@ -1,12 +1,12 @@
 <?php
 
-namespace VendorName\Skeleton\Commands;
+namespace Yaza\LaravelGoogleDriveStorage\Commands;
 
 use Illuminate\Console\Command;
 
-class SkeletonCommand extends Command
+class LaravelGoogleDriveStorageCommand extends Command
 {
-    public $signature = 'skeleton';
+    public $signature = 'laravel-google-drive-storage';
 
     public $description = 'My command';
 

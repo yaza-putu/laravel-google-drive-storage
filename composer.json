@@ -1,24 +1,23 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "yaza/laravel-google-drive-storage",
+    "description": "This is my package laravel-google-drive-storage",
     "keywords": [
-        ":vendor_name",
-        "laravel",
-        ":package_slug"
+        "laravel-google-drive-storage"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/yaza-putu/laravel-google-drive-storage",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "yaza",
+            "email": "wayan13yasa@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.1",
-        "spatie/laravel-package-tools": "^1.13.0",
-        "illuminate/contracts": "^9.0"
+        "illuminate/contracts": "^9.0",
+        "masbug/flysystem-google-drive-ext": "^2.2",
+        "spatie/laravel-package-tools": "^1.13.0"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
@@ -30,18 +29,17 @@
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",
-        "phpunit/phpunit": "^9.5",
-        "spatie/laravel-ray": "^1.26"
+        "phpunit/phpunit": "^9.5"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories"
+            "Yaza\\LaravelGoogleDriveStorage\\": "src",
+            "Yaza\\LaravelGoogleDriveStorage\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests"
+            "Yaza\\LaravelGoogleDriveStorage\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -61,10 +59,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "Yaza\\LaravelGoogleDriveStorage\\LaravelGoogleDriveStorageServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "LaravelGoogleDriveStorage": "Yaza\\LaravelGoogleDriveStorage\\Facades\\LaravelGoogleDriveStorage"
             }
         }
     },
