@@ -3,11 +3,10 @@
 namespace Yaza\LaravelGoogleDriveStorage;
 
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Yaza\LaravelGoogleDriveStorage\Commands\LaravelGoogleDriveStorageCommand;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\ServiceProvider;
 
 class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
 {
@@ -34,10 +33,10 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
                     __DIR__.'/config/google-drive-storage.php', 'filesystems'
                 );
             }
-            Storage::extend('google', function($app, $config) {
+            Storage::extend('google', function ($app, $config) {
                 $options = [];
 
-                if (!empty($config['teamDriveId'] ?? null)) {
+                if (! empty($config['teamDriveId'] ?? null)) {
                     $options['teamDriveId'] = $config['teamDriveId'];
                 }
 
