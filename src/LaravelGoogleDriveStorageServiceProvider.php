@@ -29,6 +29,11 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
     public function bootingPackage()
     {
         try {
+            if (count(@config('filesystems.disks.google')) == 0) {
+                $this->mergeConfigFrom(
+                    __DIR__.'/config/google-drive-storage.php', 'filesystems'
+                );
+            }
             Storage::extend('google', function($app, $config) {
                 $options = [];
 
