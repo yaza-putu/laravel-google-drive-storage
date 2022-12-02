@@ -28,8 +28,6 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
     public function bootingPackage()
     {
         try {
-<<<<<<< HEAD
-=======
             app()->config['filesystems.disks.google'] = [
                 'driver' => 'google',
                 'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
@@ -39,7 +37,6 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
                 //'teamDriveId' => env('GOOGLE_DRIVE_TEAM_DRIVE_ID'),
             ];
 
->>>>>>> development
             Storage::extend('google', function ($app, $config) {
                 $options = [];
 
