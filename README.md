@@ -2,6 +2,10 @@
 ![gdrive](https://is4-ssl.mzstatic.com/image/thumb/Purple122/v4/d9/cb/a8/d9cba8b1-85a0-723a-3f03-bdc6b76476d5/logo_drive_2020q4_color-0-1x_U007emarketing-0-0-0-6-0-0-0-85-220.png/1200x630wa.png)
 This package allow to store and get data from google drive like S3 AWS in laravel
 
+## Support Laravel
+- php 8.1
+- now only support laravel 9
+
 ## Installation
 
 You can install the package via composer:
@@ -24,10 +28,6 @@ GOOGLE_DRIVE_CLIENT_SECRET=xxx
 GOOGLE_DRIVE_REFRESH_TOKEN=xxx
 GOOGLE_DRIVE_FOLDER=backups
 ```
-
-## Support Laravel
-- php 8.1
-- now only support laravel 9
 
 ## Setup Google Keys
    - [Getting your Client ID and Secret](https://github.com/ivanvermeyen/laravel-google-drive-demo/blob/master/README/1-getting-your-dlient-id-and-secret.md)
