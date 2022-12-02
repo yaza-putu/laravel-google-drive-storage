@@ -29,10 +29,14 @@ GOOGLE_DRIVE_FOLDER=backups
    - [Getting your Client ID and Secret](https://github.com/ivanvermeyen/laravel-google-drive-demo/blob/master/README/1-getting-your-dlient-id-and-secret.md)
    - [Getting your Refresh Token](https://github.com/ivanvermeyen/laravel-google-drive-demo/blob/master/README/2-getting-your-refresh-token.md)
 ## Usage
-
+you can use storage driver function by laravel <br>
+example :
 ```php
- Storage::disk('google')
+ Storage::disk('google')->put($filename, File::get($filepath));
 ```
+
+## Limitations
+Using display paths as identifiers for folders and files requires them to be unique. Unfortunately Google Drive allows users to create files and folders with same (displayed) names. In such cases when unique path cannot be determined this adapter chooses the oldest (first) instance. In case the newer duplicate is a folder and user puts a unique file or folder inside the adapter will be able to reach it properly (because full path is unique).
 
 ## Changelog
 
