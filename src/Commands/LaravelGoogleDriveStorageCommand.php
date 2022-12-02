@@ -6,14 +6,18 @@ use Illuminate\Console\Command;
 
 class LaravelGoogleDriveStorageCommand extends Command
 {
-    public $signature = 'laravel-google-drive-storage';
+    public $signature = '
+        gdrive:config {name : The name of command}
+    ';
 
-    public $description = 'My command';
+    public $description = 'Publish Config Gdrive';
 
     public function handle(): int
     {
-        $this->comment('All done');
-
-        return self::SUCCESS;
+        try {
+            return self::SUCCESS;
+        } catch (\Exception $exception) {
+            return self::FAILURE;
+        }
     }
 }
