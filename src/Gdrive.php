@@ -54,15 +54,9 @@ class Gdrive implements GdriveInterface
      * @param  bool  $random_file_name
      * @return mixed|void
      */
-    public static function put($location, $file, $random_file_name = false)
+    public static function put($path, $file)
     {
-        $original_filename = $file->getClientOriginalName();
-        $file_name = $random_file_name ? rand(100000, 1001238912) : pathinfo($original_filename, PATHINFO_FILENAME);
-        $ext = $file->getClientOriginalExtension();
-
-        $location = str_replace('/'.$original_filename, '', $location);
-
-        Storage::disk('google')->put($location.'/'.$file_name.'.'.$ext, File::get($file));
+        Storage::disk('google')->put($path, File::get($file));
     }
 
     /**

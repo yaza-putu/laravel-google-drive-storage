@@ -26,7 +26,7 @@ interface GdriveInterface
      * @param $file
      * @return mixed
      */
-    public static function put($location, $file, $random_file_name);
+    static public function put($path,$file);
 
     /**
      * delete file
