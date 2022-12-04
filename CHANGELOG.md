@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-drive-storage` will be documented in this file.
 
+## V1.1.4 - 2022-12-04
+
+Add Helper For Basic Operation Laravel Google Drive
+
 ## V1.0.3 - 2022-12-02
 
 fixing conflict merge
