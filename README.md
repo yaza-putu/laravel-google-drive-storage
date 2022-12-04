@@ -40,6 +40,13 @@ example :
 ```php
  Storage::disk('google')->put($filename, File::get($filepath));
 ```
+refrensi code opration [sample code](https://github.com/ivanvermeyen/laravel-google-drive-demo/blob/master/routes/web.php)
+
+<br>
+or use helper from this package
+<br>
+1. Get File 
+
 
 ## Limitations
 Using display paths as identifiers for folders and files requires them to be unique. Unfortunately Google Drive allows users to create files and folders with same (displayed) names. In such cases when unique path cannot be determined this adapter chooses the oldest (first) instance. In case the newer duplicate is a folder and user puts a unique file or folder inside the adapter will be able to reach it properly (because full path is unique).
