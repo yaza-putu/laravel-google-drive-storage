@@ -128,13 +128,15 @@ class Gdrive implements GdriveInterface
 
     /**
      * all folder
+     *
      * @param $path
-     * @param bool $recursive
+     * @param  bool  $recursive
      * @return mixed
      */
     public static function all($path, $recursive = true)
     {
         $contents = collect(Storage::disk('google')->listContents($path, $recursive));
+
         return $contents;
     }
 }

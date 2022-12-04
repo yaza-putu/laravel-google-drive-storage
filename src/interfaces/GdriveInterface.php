@@ -71,8 +71,9 @@ interface GdriveInterface
 
     /**
      * all folder & file
+     *
      * @param $recursive
      * @return mixed
      */
-    public static function all($path,$recursive);
+    public static function all($path, $recursive);
 }
