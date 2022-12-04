@@ -68,14 +68,14 @@ class Gdrive implements GdriveInterface
     public static function getFileInfo($file_path)
     {
         $path = str_replace('\\', '/', $file_path);
-        $arr = explode($path, '/');
+        $arr = explode("/", $path);
         $file_name = end($arr);
         $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
         return (object) [
             'filename' => $file_name,
             'ext' => $ext,
-            'path' => str_replace('.'.$ext, '', $path),
+            'path' => $path,
         ];
     }
 
