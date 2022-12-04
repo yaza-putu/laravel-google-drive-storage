@@ -26,7 +26,7 @@ interface GdriveInterface
      * @param $file
      * @return mixed
      */
-    static public function put($path,$file);
+    public static function put($path, $file);
 
     /**
      * delete file
