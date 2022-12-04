@@ -2,33 +2,34 @@
 
 namespace Yaza\LaravelGoogleDriveStorage;
 
-
+use File;
 use Illuminate\Support\Facades\Storage;
 use Yaza\LaravelGoogleDriveStorage\interfaces\GdriveInterface;
-use File;
 
 class Gdrive implements GdriveInterface
 {
     /**
      * get file from gdrive
+     *
      * @param $file_path
      * @return mixed
      */
-    static public function get($file_path)
+    public static function get($file_path)
     {
         $fileinfo = self::getFileInfo($file_path);
 
         $rawData = Storage::disk('google')->get($fileinfo->path);
 
-        return (object)[
+        return (object) [
             'file' => $rawData,
             'ext' => $fileinfo->ext,
-            'filename' => $fileinfo->filename
+            'filename' => $fileinfo->filename,
         ];
     }
 
     /**
      * read file to stream
+     *
      * @param $filepath
      * @return mixed|object
      */
@@ -38,24 +39,25 @@ class Gdrive implements GdriveInterface
 
         $readStream = Storage::disk('google')->getDriver()->readStream($fileinfo->path);
 
-        return (object)[
+        return (object) [
             'file' => $readStream,
             'ext' => $fileinfo->ext,
-            'filename' => $fileinfo->filename
+            'filename' => $fileinfo->filename,
         ];
     }
 
     /**
      * put file
+     *
      * @param $location
      * @param $file
-     * @param bool $random_file_name
+     * @param  bool  $random_file_name
      * @return mixed|void
      */
     public static function put($location, $file, $random_file_name = false)
     {
         $original_filename = $file->getClientOriginalName();
-        $file_name = $random_file_name? rand(100000,1001238912) : pathinfo($original_filename, PATHINFO_FILENAME);
+        $file_name = $random_file_name ? rand(100000, 1001238912) : pathinfo($original_filename, PATHINFO_FILENAME);
         $ext = $file->getClientOriginalExtension();
 
         $location = str_replace('/'.$original_filename, '', $location);
@@ -65,29 +67,31 @@ class Gdrive implements GdriveInterface
 
     /**
      * get file info
+     *
      * @param $file_path
      * @return mixed|object
      */
-    static public function getFileInfo($file_path)
+    public static function getFileInfo($file_path)
     {
         $path = str_replace('\\', '/', $file_path);
         $arr = explode($path, '/');
         $file_name = end($arr);
         $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-        return (object)[
-          'filename' => $file_name,
-          'ext' => $ext,
-          'path' => str_replace('.'.$ext, '', $path)
+        return (object) [
+            'filename' => $file_name,
+            'ext' => $ext,
+            'path' => str_replace('.'.$ext, '', $path),
         ];
     }
 
     /**
      * delete file
+     *
      * @param $path
      * @return mixed|void
      */
-    static public function delete($path)
+    public static function delete($path)
     {
         $fileinfo = self::getFileInfo($path);
 
@@ -96,31 +100,34 @@ class Gdrive implements GdriveInterface
 
     /**
      * make directory
+     *
      * @param $dirname
      * @return mixed|void
      */
-    static public function makeDir($dirname)
+    public static function makeDir($dirname)
     {
         Storage::disk('google')->makeDirectory($dirname);
     }
 
     /**
      * delete directory
+     *
      * @param $dirpath
      * @return mixed|void
      */
-    static public function deleteDir($dirpath)
+    public static function deleteDir($dirpath)
     {
         Storage::disk('google')->deleteDirectory($dirpath);
     }
 
     /**
      * rename directory
+     *
      * @param $dirpath
      * @param $newdirname
      * @return mixed|void
      */
-    static public function renameDir($dirpath, $newdirname)
+    public static function renameDir($dirpath, $newdirname)
     {
         Storage::disk('google')->move($dirpath, $newdirname);
     }
