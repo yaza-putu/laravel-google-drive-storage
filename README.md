@@ -45,7 +45,17 @@ refrensi code opration [sample code](https://github.com/ivanvermeyen/laravel-goo
 <br>
 or use helper from this package
 <br>
-1. Get File 
+1. Put File
+
+```php
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+Gdrive::put('location/filename.png', $request->file('file'));
+// or
+Gdrive::put('filename.png', public_path('path/filename.png'));
+``` 
+
+
 
 
 ## Limitations
