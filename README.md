@@ -128,6 +128,19 @@ Gdrive::all('/');
 // or
 Gdrive::all('foldername');
 ```
+output
+```php
+Illuminate\Support\Collection {#804 ▼ // app/Http/Controllers/UploadController.php:70
+  #items: array:3 [▼
+    0 => League\Flysystem\DirectoryAttributes {#798 ▶}
+    1 => League\Flysystem\FileAttributes {#796 ▶}
+    2 => League\Flysystem\DirectoryAttributes {#783 ▶}
+  ]
+  #escapeWhenCastingToString: false
+}
+```
+
+
 - all folder & file with sub folder
 ```php
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
@@ -136,7 +149,17 @@ Gdrive::all('/', true);
 // or
 Gdrive::all('foldername', true);
 ```
-
+output
+```php
+Illuminate\Support\Collection {#804 ▼ // app/Http/Controllers/UploadController.php:70
+  #items: array:3 [▼
+    0 => League\Flysystem\DirectoryAttributes {#798 ▶}
+    1 => League\Flysystem\FileAttributes {#796 ▶}
+    2 => League\Flysystem\DirectoryAttributes {#783 ▶}
+  ]
+  #escapeWhenCastingToString: false
+}
+```
 
 ## Limitations
 Using display paths as identifiers for folders and files requires them to be unique. Unfortunately Google Drive allows users to create files and folders with same (displayed) names. In such cases when unique path cannot be determined this adapter chooses the oldest (first) instance. In case the newer duplicate is a folder and user puts a unique file or folder inside the adapter will be able to reach it properly (because full path is unique).
