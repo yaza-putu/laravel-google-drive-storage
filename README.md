@@ -45,7 +45,8 @@ refrensi code opration [sample code](https://github.com/ivanvermeyen/laravel-goo
 <br>
 or use helper from this package
 <br>
-1. Put File
+
+- Put File
 
 ```php
 use Yaza\LaravelGoogleDriveStorage\Gdrive;
@@ -55,7 +56,86 @@ Gdrive::put('location/filename.png', $request->file('file'));
 Gdrive::put('filename.png', public_path('path/filename.png'));
 ``` 
 
+- Get File
 
+```php 
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+$data = Gdrive::get('path/filename.png');
+
+return response($data->file, 200)
+    ->header('Content-Type', $data->ext);
+```
+
+- Get Large File with stream
+
+```php
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+  $readStream = Gdrive::readStream('path/filename.png');
+
+return response()->stream(function () use ($readStream) {
+    fpassthru($readStream->file);
+}, 200, [
+    'Content-Type' => $readStream->ext,
+    //'Content-disposition' => 'attachment; filename="'.$filename.'"', // force download?
+]);
+```
+
+- download file
+```php 
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+ $data = Gdrive::get('path/filename.png');
+        return response($data->file, 200)
+            ->header('Content-Type', $data->ext)
+            ->header('Content-disposition', 'attachment; filename="'.$data->filename.'"');
+```
+
+- delete
+```php 
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+ Gdrive::delete('path/filename.png');
+```
+
+- delete directory
+```php 
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+  Gdrive::deleteDir('foldername');
+```
+
+- make directory
+```php 
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+  Gdrive::makeDir('foldername');
+```
+
+- rename directory
+```php 
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+  Gdrive::renameDir('oldfolderpath', 'newfolder');
+```
+
+- all folder & file
+```php
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+Gdrive::all('/');
+// or
+Gdrive::all('foldername');
+```
+- all folder & file with sub folder
+```php
+use Yaza\LaravelGoogleDriveStorage\Gdrive;
+
+Gdrive::all('/', true);
+// or
+Gdrive::all('foldername', true);
+```
 
 
 ## Limitations
