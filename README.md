@@ -4,7 +4,7 @@ This package allow to store and get data from google drive like S3 AWS in larave
 
 ## Support
 - php 8.1
-- laravel 9
+- laravel 10
 
 ## Installation
 
