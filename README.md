@@ -22,13 +22,17 @@ GOOGLE_DRIVE_CLIENT_SECRET=xxx
 GOOGLE_DRIVE_REFRESH_TOKEN=xxx
 GOOGLE_DRIVE_FOLDER=
 ```
-example
+config filesystem.php
 ```env
-FILESYSTEM_CLOUD=google
-GOOGLE_DRIVE_CLIENT_ID=xxx.apps.googleusercontent.com
-GOOGLE_DRIVE_CLIENT_SECRET=xxx
-GOOGLE_DRIVE_REFRESH_TOKEN=xxx
-GOOGLE_DRIVE_FOLDER=backups
+'disks' => [
+    'google' => [
+      'driver' => 'google',
+      'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+      'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+      'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+      'folder' => env('GOOGLE_DRIVE_FOLDER'),
+    ]
+]
 ```
 
 ## Setup Google Keys
