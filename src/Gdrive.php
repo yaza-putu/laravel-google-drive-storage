@@ -11,7 +11,6 @@ class Gdrive implements GdriveInterface
     /**
      * get file from gdrive
      *
-     * @param $file_path
      * @return mixed
      */
     public static function get($file_path)
@@ -30,7 +29,6 @@ class Gdrive implements GdriveInterface
     /**
      * read file to stream
      *
-     * @param $filepath
      * @return mixed|object
      */
     public static function readStream($filepath)
@@ -50,7 +48,6 @@ class Gdrive implements GdriveInterface
      * put file
      *
      * @param $location
-     * @param $file
      * @param  bool  $random_file_name
      * @return mixed|void
      */
@@ -62,7 +59,6 @@ class Gdrive implements GdriveInterface
     /**
      * get file info
      *
-     * @param $file_path
      * @return mixed|object
      */
     public static function getFileInfo($file_path)
@@ -82,7 +78,6 @@ class Gdrive implements GdriveInterface
     /**
      * delete file
      *
-     * @param $path
      * @return mixed|void
      */
     public static function delete($path)
@@ -95,7 +90,6 @@ class Gdrive implements GdriveInterface
     /**
      * make directory
      *
-     * @param $dirname
      * @return mixed|void
      */
     public static function makeDir($dirname)
@@ -106,7 +100,6 @@ class Gdrive implements GdriveInterface
     /**
      * delete directory
      *
-     * @param $dirpath
      * @return mixed|void
      */
     public static function deleteDir($dirpath)
@@ -117,8 +110,6 @@ class Gdrive implements GdriveInterface
     /**
      * rename directory
      *
-     * @param $dirpath
-     * @param $newdirname
      * @return mixed|void
      */
     public static function renameDir($dirpath, $newdirname)
@@ -129,7 +120,6 @@ class Gdrive implements GdriveInterface
     /**
      * all folder
      *
-     * @param $path
      * @param  bool  $recursive
      * @return mixed
      */
