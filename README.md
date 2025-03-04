@@ -3,7 +3,7 @@
 This package allow to store and get data from google drive like S3 AWS in laravel
 
 ## Support
-- Laravel 11 (php 8.2) use V3.x
+- Laravel 11 - 12 (php 8.2) use V3.x
 - Laravel 10 (php 8.1) use V2.0.0
 
 ## Installation
