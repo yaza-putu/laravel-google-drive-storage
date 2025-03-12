@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-drive-storage` will be documented in this file.
 
+## V4.0.0 - 2025-03-12
+
+support laravel 12
+
 ## V3.0.0 - 2024-05-11
 
 Support laravel 11
