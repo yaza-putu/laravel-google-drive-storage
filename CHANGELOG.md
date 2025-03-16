@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-google-drive-storage` will be documented in this file.
 
+## V4.0.1 - 2025-03-16
+
+Downgrade a minimum php version to support laravel 12
+
 ## V4.0.0 - 2025-03-12
 
 support laravel 12
