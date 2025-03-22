@@ -21,6 +21,7 @@ FILESYSTEM_CLOUD=google
 GOOGLE_DRIVE_CLIENT_ID=xxx.apps.googleusercontent.com
 GOOGLE_DRIVE_CLIENT_SECRET=xxx
 GOOGLE_DRIVE_REFRESH_TOKEN=xxx
+GOOGLE_DRIVE_ACCESS_TOKEN=xxx
 GOOGLE_DRIVE_FOLDER=
 ```
 config filesystem.php
@@ -30,6 +31,7 @@ config filesystem.php
       'driver' => 'google',
       'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
       'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+      'accessToken' => env('GOOGLE_DRIVE_ACCESS_TOKEN'), // optional
       'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
       'folder' => env('GOOGLE_DRIVE_FOLDER'),
     ]
@@ -46,6 +48,22 @@ example :
  Storage::disk('google')->put($filename, File::get($filepath));
 ```
 refrensi code opration [sample code](https://github.com/ivanvermeyen/laravel-google-drive-demo/blob/master/routes/web.php)
+
+Usage with `accessToken`. Could be useful if you want to use your user's token e.g upload a file in their own Drive.
+
+```php
+// Build an on-demand disk
+$disk = Storage::build([
+    'driver' => 'google',
+    'clientId' => env('GOOGLE_DRIVE_CLIENT_ID'),
+    'clientSecret' => env('GOOGLE_DRIVE_CLIENT_SECRET'),
+    'accessToken' => auth()->user()->google_access_token, // Get from authenticated user
+    'refreshToken' => env('GOOGLE_DRIVE_REFRESH_TOKEN'),
+    'folder' => env('GOOGLE_DRIVE_FOLDER'),
+]);
+
+$disk->put($filename, File::get($filepath));
+```
 
 <br>
 or use helper from this package
