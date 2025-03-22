@@ -2,6 +2,4 @@
 
 namespace Yaza\LaravelGoogleDriveStorage;
 
-class LaravelGoogleDriveStorage
-{
-}
+class LaravelGoogleDriveStorage {}
