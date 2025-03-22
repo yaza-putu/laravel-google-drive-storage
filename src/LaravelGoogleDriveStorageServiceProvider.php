@@ -40,6 +40,10 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
                 $client->setClientSecret($config['clientSecret']);
                 $client->refreshToken($config['refreshToken']);
 
+                if (isset($config['accessToken'])) {
+                    $client->setAccessToken($config['accessToken']);
+                }
+
                 $service = new \Google\Service\Drive($client);
                 $adapter = new \Masbug\Flysystem\GoogleDriveAdapter($service, $config['folder'] ?? '/', $options);
                 $driver = new \League\Flysystem\Filesystem($adapter);
