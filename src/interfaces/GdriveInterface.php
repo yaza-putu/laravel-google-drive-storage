@@ -2,68 +2,85 @@
 
 namespace Yaza\LaravelGoogleDriveStorage\interfaces;
 
+use Yaza\LaravelGoogleDriveStorage\typings\GdriveFile;
+use Yaza\LaravelGoogleDriveStorage\typings\GdriveFileInfo;
+use \League\Flysystem\DirectoryListing;
+use \League\Flysystem\StorageAttributes;
+
 interface GdriveInterface
 {
     /**
-     * get file
+     * Get file
      *
-     * @return mixed
+     * @param string $file_path
+     * @return GdriveFile
      */
-    public static function get($file_path);
+    public static function get(string $file_path);
 
     /**
-     * read file with stream
+     * Read file with stream
      *
-     * @return mixed
+     * @param string $filepath
+     * @return GdriveFile
      */
-    public static function readStream($filepath);
+    public static function readStream(string $filepath);
 
     /**
-     * put file
+     * Put file
      *
-     * @return mixed
+     * @param string $path
+     * @param string $file
+     * @return void
      */
-    public static function put($path, $file);
+    public static function put(string $path, string $file);
 
     /**
-     * delete file
+     * Delete file
      *
-     * @return mixed
+     * @param string $path
+     * @return void
      */
-    public static function delete($path);
+    public static function delete(string $path);
 
     /**
-     * make directory
+     * Make directory
      *
-     * @return mixed
+     * @param string $dirname
+     * @return void
      */
-    public static function makeDir($dirname);
+    public static function makeDir(string $dirname);
 
     /**
-     * delete directory
+     * Delete directory
      *
-     * @return mixed
+     * @param string $dirpath
+     * @return void
      */
-    public static function deleteDir($dirpath);
+    public static function deleteDir(string $dirpath);
 
     /**
-     * rename directory
+     * Rename directory
      *
-     * @return mixed
+     * @param string $dirpath
+     * @param string $newdirname
+     * @return void
      */
-    public static function renameDir($dirpath, $newdirname);
+    public static function renameDir(string $dirpath, string $newdirname);
 
     /**
-     * get file info
+     * Get file info
      *
-     * @return mixed
+     * @param string $path
+     * @return GdriveFileInfo
      */
-    public static function getFileInfo($path);
+    public static function getFileInfo(string $path);
 
     /**
-     * all folder & file
+     * All folder & file
      *
-     * @return mixed
+     * @param string $path
+     * @param bool $recursive
+     * @return DirectoryListing<StorageAttributes>
      */
-    public static function all($path, $recursive);
+    public static function all(string $path, bool $recursive);
 }

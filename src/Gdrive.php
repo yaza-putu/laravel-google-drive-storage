@@ -5,82 +5,92 @@ namespace Yaza\LaravelGoogleDriveStorage;
 use File;
 use Illuminate\Support\Facades\Storage;
 use Yaza\LaravelGoogleDriveStorage\interfaces\GdriveInterface;
+use Yaza\LaravelGoogleDriveStorage\typings\GdriveFile;
+use Yaza\LaravelGoogleDriveStorage\typings\GdriveFileInfo;
+use \League\Flysystem\DirectoryListing;
+use \League\Flysystem\StorageAttributes;
 
 class Gdrive implements GdriveInterface
 {
     /**
-     * get file from gdrive
+     * Get file from gdrive
      *
-     * @return mixed
+     * @param  string $file_path
+     * @return GdriveFile
      */
-    public static function get($file_path)
+    public static function get(string $file_path): GdriveFile
     {
         $fileinfo = self::getFileInfo($file_path);
 
         $rawData = Storage::disk('google')->get($fileinfo->path);
 
-        return (object) [
-            'file' => $rawData,
-            'ext' => $fileinfo->ext,
-            'filename' => $fileinfo->filename,
-        ];
+        return new GdriveFile(
+            file: $rawData,
+            ext: $fileinfo->ext,
+            filename: $fileinfo->filename,
+            path: $fileinfo->path
+        );
     }
 
     /**
-     * read file to stream
+     * Read file to stream
      *
-     * @return mixed|object
+     * @param  string $filepath
+     * @return GdriveFile
      */
-    public static function readStream($filepath)
+    public static function readStream(string $filepath): GdriveFile
     {
         $fileinfo = self::getFileInfo($filepath);
 
         $readStream = Storage::disk('google')->getDriver()->readStream($fileinfo->path);
 
-        return (object) [
-            'file' => $readStream,
-            'ext' => $fileinfo->ext,
-            'filename' => $fileinfo->filename,
-        ];
+        return new GdriveFile(
+            file: $readStream,
+            ext: $fileinfo->ext,
+            filename: $fileinfo->filename,
+            path: $fileinfo->path
+        );
     }
 
     /**
-     * put file
+     * Put file
      *
-     * @param  $location
-     * @param  bool  $random_file_name
-     * @return mixed|void
+     * @param  string $path
+     * @param  string $file
+     * @return void
      */
-    public static function put($path, $file)
+    public static function put(string $path, string $file): void
     {
         Storage::disk('google')->put($path, File::get($file));
     }
 
     /**
-     * get file info
+     * Get file info
      *
-     * @return mixed|object
+     * @param  string $file_path
+     * @return GdriveFileInfo
      */
-    public static function getFileInfo($file_path)
+    public static function getFileInfo(string $file_path): GdriveFileInfo
     {
         $path = str_replace('\\', '/', $file_path);
         $arr = explode('/', $path);
         $file_name = end($arr);
         $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-        return (object) [
-            'filename' => $file_name,
-            'ext' => $ext,
-            'path' => $path,
-        ];
+        return new GdriveFileInfo(
+            filename: $file_name,
+            ext: $ext,
+            path: $path,
+        );
     }
 
     /**
-     * delete file
+     * Delete file
      *
-     * @return mixed|void
+     * @param  string $path
+     * @return void
      */
-    public static function delete($path)
+    public static function delete(string $path): void
     {
         $fileinfo = self::getFileInfo($path);
 
@@ -88,42 +98,47 @@ class Gdrive implements GdriveInterface
     }
 
     /**
-     * make directory
+     * Make directory
      *
-     * @return mixed|void
+     * @param  string $dirname
+     * @return void
      */
-    public static function makeDir($dirname)
+    public static function makeDir(string $dirname): void
     {
         Storage::disk('google')->makeDirectory($dirname);
     }
 
     /**
-     * delete directory
+     * Delete directory
      *
-     * @return mixed|void
+     * @param  string $dirpath
+     * @return void
      */
-    public static function deleteDir($dirpath)
+    public static function deleteDir(string $dirpath): void
     {
         Storage::disk('google')->deleteDirectory($dirpath);
     }
 
     /**
-     * rename directory
+     * Rename directory
      *
-     * @return mixed|void
+     * @param  string $dirpath
+     * @param  string $newdirname
+     * @return void
      */
-    public static function renameDir($dirpath, $newdirname)
+    public static function renameDir(string $dirpath, string $newdirname): void
     {
         Storage::disk('google')->move($dirpath, $newdirname);
     }
 
     /**
-     * all folder
+     * All folder
      *
-     * @param  bool  $recursive
-     * @return mixed
+     * @param  string   $path
+     * @param  bool     $recursive
+     * @return DirectoryListing<StorageAttributes>
      */
-    public static function all($path, $recursive = true)
+    public static function all(string $path, bool $recursive = true)
     {
         $contents = collect(Storage::disk('google')->listContents($path, $recursive));
 
