@@ -4,19 +4,16 @@ namespace Yaza\LaravelGoogleDriveStorage;
 
 use File;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\DirectoryListing;
+use League\Flysystem\StorageAttributes;
 use Yaza\LaravelGoogleDriveStorage\interfaces\GdriveInterface;
 use Yaza\LaravelGoogleDriveStorage\typings\GdriveFile;
 use Yaza\LaravelGoogleDriveStorage\typings\GdriveFileInfo;
-use \League\Flysystem\DirectoryListing;
-use \League\Flysystem\StorageAttributes;
 
 class Gdrive implements GdriveInterface
 {
     /**
      * Get file from gdrive
-     *
-     * @param  string $file_path
-     * @return GdriveFile
      */
     public static function get(string $file_path): GdriveFile
     {
@@ -34,9 +31,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Read file to stream
-     *
-     * @param  string $filepath
-     * @return GdriveFile
      */
     public static function readStream(string $filepath): GdriveFile
     {
@@ -54,10 +48,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Put file
-     *
-     * @param  string $path
-     * @param  string $file
-     * @return void
      */
     public static function put(string $path, string $file): void
     {
@@ -66,9 +56,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Get file info
-     *
-     * @param  string $file_path
-     * @return GdriveFileInfo
      */
     public static function getFileInfo(string $file_path): GdriveFileInfo
     {
@@ -86,9 +73,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Delete file
-     *
-     * @param  string $path
-     * @return void
      */
     public static function delete(string $path): void
     {
@@ -99,9 +83,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Make directory
-     *
-     * @param  string $dirname
-     * @return void
      */
     public static function makeDir(string $dirname): void
     {
@@ -110,9 +91,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Delete directory
-     *
-     * @param  string $dirpath
-     * @return void
      */
     public static function deleteDir(string $dirpath): void
     {
@@ -121,10 +99,6 @@ class Gdrive implements GdriveInterface
 
     /**
      * Rename directory
-     *
-     * @param  string $dirpath
-     * @param  string $newdirname
-     * @return void
      */
     public static function renameDir(string $dirpath, string $newdirname): void
     {
@@ -134,8 +108,6 @@ class Gdrive implements GdriveInterface
     /**
      * All folder
      *
-     * @param  string   $path
-     * @param  bool     $recursive
      * @return DirectoryListing<StorageAttributes>
      */
     public static function all(string $path, bool $recursive = true)

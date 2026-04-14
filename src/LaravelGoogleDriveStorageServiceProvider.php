@@ -2,8 +2,13 @@
 
 namespace Yaza\LaravelGoogleDriveStorage;
 
+use Google\Client;
+use Google\Service\Drive;
+use Illuminate\Filesystem\FilesystemAdapter;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use League\Flysystem\Filesystem;
+use Masbug\Flysystem\GoogleDriveAdapter;
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 use Yaza\LaravelGoogleDriveStorage\Commands\LaravelGoogleDriveStorageCommand;
@@ -35,7 +40,7 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
                     $options['teamDriveId'] = $config['teamDriveId'];
                 }
 
-                $client = new \Google\Client;
+                $client = new Client;
                 $client->setClientId($config['clientId']);
                 $client->setClientSecret($config['clientSecret']);
                 $client->refreshToken($config['refreshToken']);
@@ -44,11 +49,11 @@ class LaravelGoogleDriveStorageServiceProvider extends PackageServiceProvider
                     $client->setAccessToken($config['accessToken']);
                 }
 
-                $service = new \Google\Service\Drive($client);
-                $adapter = new \Masbug\Flysystem\GoogleDriveAdapter($service, $config['folder'] ?? '/', $options);
-                $driver = new \League\Flysystem\Filesystem($adapter);
+                $service = new Drive($client);
+                $adapter = new GoogleDriveAdapter($service, $config['folder'] ?? '/', $options);
+                $driver = new Filesystem($adapter);
 
-                return new \Illuminate\Filesystem\FilesystemAdapter($driver, $adapter);
+                return new FilesystemAdapter($driver, $adapter);
             });
         } catch (\Exception $e) {
             Log::error($e);
